@@ -1,0 +1,49 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  
+    <fieldset>
+      <label for="firstname">Firstname</label>
+      <input type="text" name="firstname" [(ngModel)]="model.firstname" #firstname="ngModel" required minlength="3" maxlength="15"/>
+    </fieldset>
+  
+    <!-- Message d'erreurs de firstname -->
+    <div *ngIf="isSubmitted && firstname.errors">
+      <span *ngIf="firstname.errors?.['required']">Le prénom est requis</span>
+      <span *ngIf="firstname.errors?.['minlength']">Le prénom doit comporter au moins 3 caractères.</span>
+      <span *ngIf="firstname.errors?.['maxlength']">Le prénom ne doit pas dépasser 15 caractères.</span>
+    </div>
+  
+    <fieldset>
+        <label for="lastname">Lastname</label>
+        <input type="text" name="lastname" [(ngModel)]="model.lastname" #lastname="ngModel" required minlength="3" maxlength="15"/>
+      </fieldset>
+    
+      <!-- Message d'erreurs de firstname -->
+      <div *ngIf="isSubmitted && lastname.errors">
+        <span *ngIf="lastname.errors?.['required']">Le nom est requis</span>
+        <span *ngIf="lastname.errors?.['minlength']">Le nom doit comporter au moins 3 caractères.</span>
+        <span *ngIf="lastname.errors?.['maxlength']">Le nom ne doit pas dépasser 15 caractères.</span>
+      </div>
+  
+    <fieldset>
+      <label for="contact">Contact</label>
+      <input type="email" name="contact" [(ngModel)]="model.contact" #contact="ngModel" required email>
+    </fieldset>
+  
+    <!-- Message d'erreurs de contact -->
+    <div *ngIf="isSubmitted && contact.errors">
+      <span *ngIf="contact.errors?.['required']">Le champ email est requis</span>
+      <span *ngIf="contact.errors?.['email']">L'email est invalide</span>
+    </div>
+  
+    <fieldset>
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+    </fieldset>
+
+    <div *ngIf="isSubmitted && password.errors">
+        <span *ngIf="password.errors?.['required']">Le mot de passe est requis</span>
+    </div>
+      
+    <button type="reset" (click)="reset()">Restaurer</button>
+    <button type="submit" >Sauvegarder</button>
+  </form>
